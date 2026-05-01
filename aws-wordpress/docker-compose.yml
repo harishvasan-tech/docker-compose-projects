@@ -1,0 +1,24 @@
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: vasanuser
+      WORDPRESS_DB_PASSWORD: vasanpass
+      WORDPRESS_DB_NAME: vasandb
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: vasandb
+      MYSQL_USER: vasanuser
+      MYSQL_PASSWORD: vasanpass
+      MYSQL_ROOT_PASSWORD: rootpass
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
